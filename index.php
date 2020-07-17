@@ -29,7 +29,21 @@ if(isset($_POST['login']))
 
     if($database->login($username,$password,$remember))
     {
-      header('location:dashboard.php');
+      if($_SESSION['role']=='Admin'){
+      header('location:dashboardadmin.php');
+      } else if($_SESSION['role']=='Kepala Sekolah') {
+        header('location:dashboard.php');
+      } else if(($_SESSION['role']=='Humas/Hubin')){
+        header('location:dashboardhubin.php');
+      }
+    }  else {
+      echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+          <span class="alert-inner--icon"><i class="ni ni-support-16"></i></span>
+          <span class="alert-inner--text"><strong>Password yang dimasukkan salah!</strong></span>
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>';
     }
 }
 ?>
@@ -83,7 +97,6 @@ if(isset($_POST['login']))
                 <h1 class="h4">LOGIN</h1>
               </div>
                 <form class="form-signin" method="post" action="">
-                  <img class="mb-4" src="assets/assets/css/bootstrap-solid.svg" alt="" width="72" height="72">
                   <label for="username" class="sr-only">Username</label>
                   <input type="text" id="username" class="form-control" placeholder="Username" name="username" required autofocus>
                   <label for="password" class="sr-only">Password</label>
@@ -94,7 +107,6 @@ if(isset($_POST['login']))
                     </label>
                   </div>
                   <button class="btn btn-lg btn-primary btn-block" type="submit" name="login">Sign in</button>
-                  <a href="register.php" class="btn btn-lg btn-success btn-block">Register</a>
                 </form>
               <div class="text-center">
               <a href="#" class="text-primary"><small>Lupa Password?</small></a>

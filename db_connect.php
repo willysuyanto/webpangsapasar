@@ -20,7 +20,35 @@ class database{
 			$hasil[] = $row;
 		}
 		return $hasil;
-    }
+	}
+	
+	function tampil_data_user()
+	{
+		$data = mysqli_query($this->koneksi,"select * from tb_user");
+		while($row = mysqli_fetch_array($data)){
+			$hasil[] = $row;
+		}
+		return $hasil;
+	}
+
+	function tampil_data_smp()
+	{
+		$data = mysqli_query($this->koneksi,"select * from tb_smp");
+		while($row = mysqli_fetch_array($data)){
+			$hasil[] = $row;
+		}
+		return $hasil;
+	}
+
+	function tampil_data_siswa_smp()
+	{
+		$data = mysqli_query($this->koneksi,"select * from tb_siswa_smp INNER JOIN tb_smp ON tb_siswa_smp.id_smp = tb_smp.id;");
+		while($row = mysqli_fetch_array($data)){
+			$hasil[] = $row;
+		}
+		return $hasil;
+	}
+	
     
     function tambah_data_siswa($nama,$sekolah_asal,$lokasi,$id_sekolah,$jurusan,$angkatan)
 	{	
@@ -29,9 +57,9 @@ class database{
 	}
  
  
-	function register($username,$email,$password,$nama)
+	function register($username,$email,$password,$nama,$role)
 	{	
-		$insert = mysqli_query($this->koneksi,"insert into tb_user (`id`, `username`, `email`, `password`, `nama`, `role`) values ('','$username','$email','$password','$nama','Admin')");
+		$insert = mysqli_query($this->koneksi,"insert into tb_user (`id`, `username`, `email`, `password`, `nama`, `role`) values ('','$username','$email','$password','$nama','$role')");
 		return $insert;
 	}
  
@@ -49,6 +77,7 @@ class database{
 			}
 			$_SESSION['username'] = $username;
 			$_SESSION['nama'] = $data_user['nama'];
+			$_SESSION['role'] = $data_user['role'];
 			$_SESSION['is_login'] = TRUE;
 			return TRUE;
 		}
