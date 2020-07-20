@@ -40,6 +40,12 @@ class database{
 		return $hasil;
 	}
 
+	function tambah_data_smp($nama,$email,$lokasi,$no_tlp)
+	{	
+		$insert = mysqli_query($this->koneksi,"insert into `tb_smp`(`id`, `nama_smp`, `email`, `lokasi`, `no_tlp`) values ('','$nama','$email','$lokasi','$no_tlp')");
+		return $insert;
+	}
+
 	function tampil_data_siswa_smp()
 	{
 		$data = mysqli_query($this->koneksi,"select * from tb_siswa_smp INNER JOIN tb_smp ON tb_siswa_smp.id_smp = tb_smp.id;");
@@ -47,6 +53,12 @@ class database{
 			$hasil[] = $row;
 		}
 		return $hasil;
+	}
+
+	function tambah_data_siswa_smp($minat,$bakat,$id_smp,$nama,$umur)
+	{	
+		$insert = mysqli_query($this->koneksi,"insert into `tb_siswa_smp`(`id`, `minat`, `bakat`, `id_smp`, `nama`, `umur`) values ('','$minat','$bakat','$id_smp','$nama','$umur')");
+		return $insert;
 	}
 	
     

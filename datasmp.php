@@ -30,7 +30,7 @@ $data_smp = $db->tampil_data_smp();
 
       <div class="container-fluid">
       <div class="container my-2">
-      <a href="#" class="btn btn-primary mb-4">Tambah Data</a>
+      <a href="datasmpadd.php" class="btn btn-primary mb-4">Tambah Data SMP</a>
     <table class="table table-sm table-hover display" id="table_id">
     <thead>
       <tr>
